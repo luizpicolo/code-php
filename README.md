@@ -7,7 +7,7 @@ de controlar todo o processo de ocorrências e relatórios de desempenho escolar
 Possui menus auto-explicativos e, futuramente, um manual eletrônico para o auxilo no manuseio do 
 software, ou, para usuários mais avançados, à adaptação de novos sistemas baseados no mesmo. 
 Sendo assim, pode-se dizer que, o Sistema de Gestão de Ocorrências de Desempenho Escolar é de 
-fácil operação e automatiza as principais rotinas envolvidas no objetivo proposto. 
+fácil operação e automatiza as principais rotinas envolvidas no objetivo proposto.<br>
 Operando em ambiente web, tem visual limpo que torna a navegação simples e rápida, 
 trabalhando em mono ou multi-usuário.</p>
 
