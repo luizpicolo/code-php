@@ -30,7 +30,7 @@ Vinícios Carvalho - http://www.facebook.com/vinicioskf?ref=ts&fref=ts<br>
 
 A instalação do C.O.D.E é extremamente simples.<br>
 Após o downloads do sistema, faça o upload no local desejado.<br>
-Crie seu banco e importe o arquivo sql que esta no diretorio 
+Crie seu banco e importe o arquivo sql que está no diretório 
 <pre>sql/sql.sql</pre>
 Logo após acesse o arquivo <pre>config/config.php</pre> e mude as configurações do banco 
 com os dados do banco criado.<br /><br />
