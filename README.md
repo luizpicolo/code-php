@@ -26,7 +26,7 @@ Raquel Campos Klein - http://www.facebook.com/queldevelopj?fref=ts<br>
 Wilma Costa - http://www.facebook.com/profile.php?id=100002254005555<br>
 Vinícios Carvalho - http://www.facebook.com/vinicioskf?ref=ts&fref=ts<br>
 
-<h2>Instalação</h2>
+<h2>Instalação:</h2>
 
 A instalação do C.O.D.E é extremamente simples.<br>
 Após o downloads do sistema, faça o upload no local desejado.<br>
