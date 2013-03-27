@@ -43,6 +43,7 @@ define('PORTA', '3306');
 </pre>
 Se for servidor Linux, mude as permissões dos diretório:<br>
 <b>temp/ = 0777<br></b>
+<b>assets/fotosAlunos/ = 0777<br></b>
 <b>application/logs/ = 0777<br></b>
        
 
