@@ -1,0 +1,45 @@
+/* Os seres humanos responsáveis */
+/* humanstxt.org */
+
+
+/* Time de Desenvolvedores */
+
+    Criador: Luiz Picolo
+    Contato: luizpicolo@ibest.com.br
+    Twitter: @luizpicolo_
+    Site: www.luizpioclo.com.br
+    Do: Brasil
+
+/* Ideia Original */
+
+    Cooperador: Michele Fernanda Picolo
+    Contato: michele.f.picolo@gmail.com
+    Twitter: 
+    Site: 
+    Do: Brasil
+
+/* Agradecimentos */
+    
+    Cooperador:  Vinicios Carvalho
+    Contato: vinicioskf@gmail.com
+    Twitter: @viniicoskf
+    Site: 
+    Do: Brasil
+    
+    Cooperadora: Wilma Costa
+    Contato: wilma.serpa@ig.com.br
+    Twitter: 
+    Site: 
+    Do: Brasil
+
+    Cooperadora: Rachel Campos Klein
+    Contato: quelzita2008@gmail.com
+    Twitter: 
+    Site: 
+    Do: Brasil
+    
+
+/* SITE  */
+    
+    Último Atualização : 2013/03/26
+    Linguagem: Pt-br
