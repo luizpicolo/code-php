@@ -33,7 +33,14 @@ Após o downloads do sistema, faça o upload no local desejado.<br>
 Crie seu banco e importe o arquivo sql que está no diretório 
 <pre>sql/sql.sql</pre>
 Logo após acesse o arquivo <pre>config/config.php</pre> e mude as configurações do banco 
-com os dados do banco criado.<br /><br />
+com os dados do banco criado.
+<pre>
+define('HOSTNAME', 'URL');
+define('USERNAME', 'USUÁRIO');
+define('PASSWORD', 'SENHA');
+define('DATABASE', 'BANCO DE DADOS');
+define('PORTA', '3306');    
+</pre>
 Se for servidor Linux, mude as permissões dos diretório:<br>
 <b>temp/ = 0777<br></b>
 <b>application/logs/ = 0777<br></b>
