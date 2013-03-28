@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `alunos` (
   `contatoResponsavel` varchar(70) DEFAULT NULL,
   `dataMatricula` date DEFAULT NULL,
   `dataTerminoEstudos` date DEFAULT NULL,
-  `foto` varchar(45) NOT NULL,
+  `foto` varchar(45) DEFAULT NULL,
   `status` enum('1','2') DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNICOS` (`aluno`),
