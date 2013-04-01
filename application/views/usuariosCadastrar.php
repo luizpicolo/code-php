@@ -3,8 +3,8 @@
         <legend>Cadastrar Usuários</legend>
         <label>Nome</label>
         <input type="text" name="nome" required>
-        <label>Email</label>
-        <input type="email" name="email" required>
+        <label>Usuário</label>
+        <input type="text" name="usuario" required>
         <label>Senha</label>
         <input type="password" name="senha" required>
         <label>Repetir Senha</label>

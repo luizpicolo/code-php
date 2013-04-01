@@ -32,7 +32,7 @@ class LoginController extends CI_Controller {
         require 'autenticarUsuario.php';
 
         $AutenticarUsuario = new AutenticarUsuario();
-        $AutenticarUsuario->setEmail($_POST['email']);
+        $AutenticarUsuario->setUsuario($_POST['usuario']);
         $AutenticarUsuario->setSenha($_POST['senha']);
         $dados = $AutenticarUsuario->getDadosAutenticados();
 

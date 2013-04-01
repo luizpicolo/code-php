@@ -11,6 +11,7 @@
                     <option></option>
                     <option value="1">Ocorrências</option>
                     <option value="2">Desempenho Escolar</option>
+<!--                    <option value="3">Completo</option>-->
                 </select>
                 <div class="row-fluid">
                     <div class="span5">

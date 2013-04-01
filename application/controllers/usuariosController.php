@@ -212,7 +212,7 @@ class UsuariosController extends CI_Controller {
         // Organizar array contendo os dados do usuário
         $dados = array(
             'nome' => $_POST['nome'],
-            'email' => $_POST['email'],
+            'usuario' => md5($_POST['usuario']),
             'senha' => md5($_POST['senha']),
             'nivel' => $_POST['nivel'],
             'dataCadastro' => date("Y-m-s H:i:s"),
@@ -267,7 +267,7 @@ class UsuariosController extends CI_Controller {
             $array = array(
                 'id' => $_POST['id'],
                 'nome' => $_POST['nome'],
-                'email' => $_POST['email'],
+                'usuario' => md5($_POST['usuario']),
                 'senha' => md5($_POST['senha'])
             );
         }
@@ -276,7 +276,7 @@ class UsuariosController extends CI_Controller {
             $array = array(
                 'id' => $_POST['id'],
                 'nome' => $_POST['nome'],
-                'email' => $_POST['email']
+                'usuario' => md5($_POST['usuario']),
             );
         }
         

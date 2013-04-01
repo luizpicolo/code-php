@@ -12,12 +12,11 @@
  * Documentação do Framework Codeigniter
  * @see http://ellislab.com/codeigniter/user-guide/index.html
  */
-
 // Verifica se o BASEPATH está definido, caso contrário não carrega o controlador
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
-class RelatorioController extends CI_Controller
-{
+class RelatorioController extends CI_Controller {
 
     // Aqui é feito a reescrita da classe construtora e a verificação
     // da autenticidade do usuário
@@ -39,12 +38,13 @@ class RelatorioController extends CI_Controller
     }
 
     /*
-        Método para apresebtar a tela para gerar is relatórios em pdf
-    */
+      Método para apresebtar a tela para gerar is relatórios em pdf
+     */
+
     public function gerarRelatorio()
     {
         $this->load->model("crud");
-        
+
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -81,10 +81,11 @@ class RelatorioController extends CI_Controller
     }
 
     /*
-        Método para gerar os relatorios
-        Este método faz a busca e após gera os relatórios e os
-        salva no caminho especificado.
-    */
+      Método para gerar os relatorios
+      Este método faz a busca e após gera os relatórios e os
+      salva no caminho especificado.
+     */
+
     public function buscar()
     {
         $this->load->helper('file');
@@ -95,42 +96,94 @@ class RelatorioController extends CI_Controller
         $id = explode("-", $_POST["idAlunos"]);
 
         /*
-            Verifica o Tipo de relatório desejado
-            1 = OCorrencias
-            2 = Desempenho Escolar
-        */
+          Verifica o Tipo de relatório desejado
+          1 = OCorrencias
+          2 = Desempenho Escolar
+         */
         if ($_POST["tipoDeRelatorio"] == 1)
         {
             $parametros = array(
-                "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, a.aluno as aluno, u.nome as usuario, o.ocorrencia, o.solucao, a.foto",
+                "select" => "o.id as id, 
+                             o.idAluno, 
+                             o.idUsuario, 
+                             DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, 
+                             a.aluno as aluno, 
+                             u.nome as usuario, 
+                             o.ocorrencia, 
+                             o.solucao, 
+                             a.foto",
                 "table" => "ocorrencias as o",
-                "where" => array(
-                    "o.idAluno" => $id[0],
-                    "o.dataOcorrencia >=" => formata_data($_POST["dataInicio"], 1),
-                    "o.dataOcorrencia <=" => formata_data($_POST["dataFinal"], 1)),
+                "where" => array("o.idAluno" => $id[0],
+                                 "o.dataOcorrencia >=" => formata_data($_POST["dataInicio"], 1),
+                                 "o.dataOcorrencia <=" => formata_data($_POST["dataFinal"], 1)
+                           ),
                 "order_by" => "",
                 "limit" => "",
                 "like" => "",
                 "group_by" => "",
-                "join" => array("usuarios as u" => "u.id = o.idUsuario", "alunos as a" => "a.id = o.idAluno")
+                "join" => array("usuarios as u" => "u.id = o.idUsuario", 
+                                "alunos as a" => "a.id = o.idAluno"
+                          )
             );
         }
-        else
+        else if ($_POST["tipoDeRelatorio"] == 2)
         {
-            $parametros = array(
-                "select" => "d.id as id, d.idAluno, d.idUsuario, DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, a.aluno as aluno, u.nome as usuario, d.desempenhoEscolar, a.foto",
+            $parametros = array (
+                "select" => "d.id as id, 
+                             d.idAluno, 
+                             d.idUsuario, 
+                             DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, 
+                             DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, 
+                             a.aluno as aluno, 
+                             u.nome as usuario, 
+                             d.desempenhoEscolar, 
+                             a.foto",
                 "table" => "desempenho as d",
-                "where" => array(
-                    "d.idAluno" => $id[0],
-                    "d.dataInicio >=" => formata_data($_POST["dataInicio"], 1),
-                    "d.dataFinal <=" => formata_data($_POST["dataFinal"], 1)),
+                "where" => array ("d.idAluno" => $id[0],
+                                  "d.dataInicio >=" => formata_data($_POST["dataInicio"], 1),
+                                  "d.dataFinal <=" => formata_data($_POST["dataFinal"], 1)
+                           ),
                 "order_by" => "",
                 "limit" => "",
                 "like" => "",
                 "group_by" => "",
-                "join" => array("usuarios as u" => "u.id = d.idUsuario", "alunos as a" => "a.id = d.idAluno")
+                "join" => array ("usuarios as u" => "u.id = d.idUsuario", 
+                                 "alunos as a" => "a.id = d.idAluno"
+                          )
             );
         }
+//        else
+//        {
+//            $parametros = array(
+//                "select" => "o.id as id, 
+//                            o.idAluno, 
+//                            o.idUsuario, 
+//                            DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, 
+//                            a.aluno as aluno, 
+//                            u.nome as usuario, 
+//                            o.ocorrencia, 
+//                            o.solucao, 
+//                            a.foto, 
+//                            DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, 
+//                            DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, 
+//                            d.desempenhoEscolar",
+//                "table" => "ocorrencias_ as o",
+//                "where" => array("o.idAluno" => $id[0],
+//                                 "o.dataOcorrencia >=" => formata_data($_POST["dataInicio"], 1),
+//                                 "o.dataOcorrencia <=" => formata_data($_POST["dataFinal"], 1),
+//                                 "d.dataInicio >=" => formata_data($_POST["dataInicio"], 1),
+//                                 "d.dataFinal <=" => formata_data($_POST["dataFinal"], 1)
+//                            ),
+//                "order_by" => "o.dataOcorrencia asc, d.dataInicio asc",
+//                "limit" => "",
+//                "like" => "",
+//                "group_by" => "",
+//                "join" => array("usuarios as u" => "u.id = o.idUsuario", 
+//                                "alunos as a" => "a.id = o.idAluno", 
+//                                "desempenho as d" => "a.id = d.idAluno"
+//                          )
+//            );
+//        }
 
         $dados = $this->crud->select($parametros, false);
 
@@ -146,16 +199,17 @@ class RelatorioController extends CI_Controller
         $html .= '<img src="assets/pdf/logo.jpg" width="200">';
         $html .= '<br /><h1 style="margin: 20px 0 0 0; text-align: center; float: right">Relatório de Exemplo</h1><br /><br />';
         $html .= '<p style="margin: 0; padding: 0">';
-        if (@$dados[0]->foto){
-        $html .= '<h1 id="nome"><img src="assets/fotosAlunos/'.@$dados[0]->foto.'" width="300"></h1>';
+        if (@$dados[0]->foto)
+        {
+            $html .= '<h1 id="nome"><img src="assets/fotosAlunos/' . @$dados[0]->foto . '" width="300"></h1>';
         }
         $html .= '<h2 id="foto">' . @$dados[0]->aluno . '</h2>';
 
         /*
-            Aqui se verifica o tipo de relatório
-            1 = OCorrencias
-            2 = Desempenho Escolar
-        */
+          Aqui se verifica o tipo de relatório
+          1 = OCorrencias
+          2 = Desempenho Escolar
+         */
         if ($_POST["tipoDeRelatorio"] == 1)
         {
             foreach ($dados as $inf):
@@ -163,19 +217,30 @@ class RelatorioController extends CI_Controller
                       <h4>Ocorrência</h4>
                       <p>' . $inf->ocorrencia . '</p>
                       <h4>Solução Adotada</h4>
-                      <p>' . $inf->solucao . '</p>
-                      <hr>';
+                      <p>' . $inf->solucao . '</p>';
             endforeach;
         }
-        else
+        else if ($_POST["tipoDeRelatorio"] == 2)
         {
             foreach ($dados as $inf):
                 $html .= '<h4>Relator: ' . $inf->usuario . '<br />Período de Avaliação: ' . $inf->dataInicio . ' à ' . $inf->dataFinal . '</h4>
                       <h4>Desempenho Escolar</h4>
-                      <p>' . $inf->desempenhoEscolar . '</p>
-                      <hr>';
+                      <p>' . $inf->desempenhoEscolar . '</p>';
             endforeach;
         }
+//        else
+//        {
+//            foreach ($dados as $inf):
+//                $html .= '<h4>Relator: ' . $inf->usuario . '<br />Data Ocorrência: ' . $inf->dataOcorrencia . '</h4>
+//                      <h4>Ocorrência</h4>
+//                      <p>' . $inf->ocorrencia . '</p>
+//                      <h4>Solução Adotada</h4>
+//                      <p>' . $inf->solucao . '</p>
+//                      <h4>Relator: ' . $inf->usuario . '<br />Período de Avaliação: ' . $inf->dataInicio . ' à ' . $inf->dataFinal . '</h4>
+//                      <h4>Desempenho Escolar</h4>
+//                      <p>' . $inf->desempenhoEscolar . '</p>';
+//            endforeach;
+//        }
 
         $html .= '</p></div></body></html>';
 
@@ -183,10 +248,10 @@ class RelatorioController extends CI_Controller
         if ($dados)
         {
             /*
-                Classe DOMPDF
-                @pach /application/library/dompdf
-                @see https://code.google.com/p/dompdf/
-            */
+              Classe DOMPDF
+              @pach /application/library/dompdf
+              @see https://code.google.com/p/dompdf/
+             */
             $dompdf = new DOMPDF();
             $dompdf->load_html(utf8_decode($html));
             $dompdf->set_paper("a4", "portrait");
@@ -212,7 +277,7 @@ class RelatorioController extends CI_Controller
             '<button type="button" class="close" data-dismiss="alert">&times;</button>' .
             '<h4>Sucesso!</h4>' .
             '<p>Seu relatório foi gerado com sucesso. Clique no botão abaixo para salva-ló</p>' .
-            '<p><a class="btn" target="blank" href="' . $dir . '"><i class="icon-download-alt"></i> Salvar Relatório</a>' .
+            '<p><a class="btn" target="blank" href="' . $dir . '"><i class="icon-download-alt"></i> Visualizaz Relatório</a>' .
             '</p></div>';
         }
         else

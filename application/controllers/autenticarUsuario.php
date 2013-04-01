@@ -18,7 +18,7 @@ if (!defined('BASEPATH'))
 
 class AutenticarUsuario extends CI_Controller
 {
-    private $email;
+    private $usuario;
     private $senha;
     private $dadosAutenticados;
 
@@ -27,9 +27,9 @@ class AutenticarUsuario extends CI_Controller
      * @param String
      * @return NULL
      */
-    public function setEmail($usuario)
+    public function setUsuario($usuario)
     {
-        $this->email = $usuario;
+        $this->usuario = $usuario;
     }
 
     /**
@@ -58,13 +58,13 @@ class AutenticarUsuario extends CI_Controller
     private function autenticaUsuario()
     {
         // Verica se o usuário e senha foram digitados
-        if ($this->email && $this->senha)
+        if ($this->usuario && $this->senha)
         {
             // Parâmetros para a busca do usuário mediante os dados passados
             $parametros = array(
                 "select" => "*",
                 "table" => "usuarios",
-                "where" => array("status" => "1", "email" => $this->anti_injection($this->email), "senha" => md5($this->anti_injection($this->senha))),
+                "where" => array("status" => "1", "usuario" => md5($this->anti_injection($this->usuario)), "senha" => md5($this->anti_injection($this->senha))),
                 "order_by" => "",
                 "like" => "",
                 "limit" => "",

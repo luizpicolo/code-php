@@ -4,8 +4,8 @@
         <label>Nome</label>
         <input type="text" name="nome" value="<?php echo $dados[0]->nome; ?>" required>
         <label>Email</label>
-        <input type="text" name="email1" value="<?php echo $dados[0]->email; ?>" disabled>
-        <input type="hidden" name="email" value="<?php echo $dados[0]->email; ?>">
+        <input type="text" name="usuario1" value="<?php echo $dados[0]->usuario; ?>" disabled>
+        <input type="hidden" name="usuario" value="<?php echo $dados[0]->usuario; ?>">
         <label>Senha</label>
         <input type="password" name="senha">
         <label>Repetir Senha</label>

@@ -68,7 +68,7 @@
         <div class="container">
             <form data-remote="true" focus-response="#mensagem" id="form" method="post" class="form-signin" action="index.php/logincontroller/autenticacao">
                 <h2 class="form-signin-heading">Faça o Login</h2>
-                <input type="email" name="email" class="input-block-level" placeholder="Endereço de Email" required>
+                <input type="text" name="usuario" class="input-block-level" placeholder="Usuário" required>
                 <input type="password" name="senha" class="input-block-level" placeholder="Senha" required>
 <!--                <label class="checkbox ">
                     <input type="checkbox" value="remember-me">Lembre-me
