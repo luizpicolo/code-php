@@ -3,7 +3,7 @@
 <h2>Sobre o Sistema:</h2>
 
 <p>O <b>Controle de Ocorrências de Desempenho Escolar</b> é um software desenvolvido com o objetivo 
-de controlar todo o processo de ocorrências e relatórios de desempenho escolar de forma prática e segura. 
+de controlar parte do processo de ocorrências e relatórios de desempenho escolar de forma prática e segura. 
 Possui menus auto-explicativos e, futuramente, um manual eletrônico para o auxilo no manuseio do 
 software, ou, para usuários mais avançados, à adaptação de novos sistemas baseados no mesmo. 
 Sendo assim, pode-se dizer que, o Sistema de Gestão de Ocorrências de Desempenho Escolar é de 
