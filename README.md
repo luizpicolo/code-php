@@ -23,6 +23,9 @@ Framework Codeigniter - www.codeigniter.com<br>
 Framework Css Twitter BootStrap - http://twitter.github.com/bootstrap<br>
 Framework Jquery - www.jquery.com<br>
 
+<h2>Reporte erros:</h2>
+Reporte erros: https://github.com/luizpicolo/code/issues
+
 <h2>Cooperadores:</h2>
 
 Michele Fernanda Picolo - http://www.facebook.com/michele.picolo.7?fref=ts<br>
