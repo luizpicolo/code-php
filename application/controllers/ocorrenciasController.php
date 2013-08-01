@@ -280,7 +280,7 @@ class OcorrenciasController extends CI_Controller {
         }
 
         // Quantidade de registro a serem mostrados por páginma
-        $qtd = 10;
+        $qtd = 1;
 
         if ($this->uri->segment(4) == "")
         {
@@ -293,7 +293,7 @@ class OcorrenciasController extends CI_Controller {
 
         if ($this->session->userdata('nivel') > 1)
         {
-            $parametros = array(
+            $parametros = array (
                 "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, a.aluno, u.nome as usuario",
                 "table" => "ocorrencias as o",
                 "where" => array("o.idUsuario" => $this->session->userdata('id')),
@@ -304,7 +304,7 @@ class OcorrenciasController extends CI_Controller {
         }
         else
         {
-            $parametros = array(
+            $parametros = array (
                 "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, a.aluno, u.nome as usuario",
                 "table" => "ocorrencias as o",
                 //"where" => array("o.idUsuario" => $this->session->userdata('id')),
@@ -312,12 +312,13 @@ class OcorrenciasController extends CI_Controller {
                 "like" => array("aluno" => $dadosBusca),
                 "join" => array("usuarios as u" => "u.id = o.idUsuario", "alunos as a" => "a.id = o.idAluno")
             );
+
         }
 
         $dados = $this->crud->select($parametros, false);
 
         $config['base_url'] = base_url() . "index.php/" . $this->uri->segment(1) . "/" . $this->uri->segment(2) . "/" . $this->uri->segment(3) . "/";
-        $config['total_rows'] = count($dados);
+        $config['total_rows'] = $this->crud->getCount("ocorrencias");
         $config['uri_segment'] = 4;
         $config['per_page'] = $qtd;
         $config['first_tag_open'] = '<li>';
