@@ -280,7 +280,7 @@ class OcorrenciasController extends CI_Controller {
         }
 
         // Quantidade de registro a serem mostrados por páginma
-        $qtd = 1;
+        $qtd = 20;
 
         if ($this->uri->segment(4) == "")
         {
