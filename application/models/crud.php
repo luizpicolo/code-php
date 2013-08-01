@@ -120,7 +120,8 @@ class Crud extends CI_Model
         // Retorna os resultado limitados ao parâmetro passado
         if ($parametros['limit'])
         {
-            $this->db->limit($parametros['limit']);
+            $retorno = explode(",", $parametros['limit']);
+            $this->db->limit($retorno[0], $retorno[1]);
         }
 
         // Retorna os resultado limitados ao parâmetro passado
@@ -275,6 +276,22 @@ class Crud extends CI_Model
         }
     }
     
+    /*
+     * Conta Data
+     * Méthodo  resposável por retornar a quantidade de dados de uma tabela
+     * 
+     * @param array
+     * @param array
+     * @return object
+     * 
+     * Caso o ID não exista no segundo parâmetro o delete será feito na tabela completa
+     * 
+     */
+    public function getCount($tabela)
+    {
+        return $this->db->count_all($tabela);
+    }
+            
     /**
      * Metodos para fechar conexao
      */
