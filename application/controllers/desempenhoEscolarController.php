@@ -17,15 +17,12 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class DesempenhoEscolarController extends CI_Controller
-{
+class DesempenhoEscolarController extends CI_Controller {
 
     // Fazemos a reescrita da classe construtora
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        if (!$this->session->userdata('logado'))
-        {
+        if (!$this->session->userdata('logado')) {
             redirect('', 'refresh');
         }
     }
@@ -33,8 +30,7 @@ class DesempenhoEscolarController extends CI_Controller
     /**
      * Método construtor 
      */
-    public function index()
-    {
+    public function index() {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -45,8 +41,7 @@ class DesempenhoEscolarController extends CI_Controller
     }
 
     // Método que chama a pagina para cadastrar o Desempenho Escolar
-    public function Cadastrar()
-    {
+    public function Cadastrar() {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -67,15 +62,11 @@ class DesempenhoEscolarController extends CI_Controller
 
         // Solução nada elegante, gambiarra nervosa : ( )
         $cont = 0;
-        foreach ($this->crud->select($parametros) as $dados)
-        {
-            if ($cont == 0)
-            {
+        foreach ($this->crud->select($parametros) as $dados) {
+            if ($cont == 0) {
                 $array_alunos .= '"' . $dados->id . ' - ' . $dados->aluno . '"';
                 $cont++;
-            }
-            else
-            {
+            } else {
                 $array_alunos .= ',"' . $dados->id . ' - ' . $dados->aluno . '"';
             }
         }
@@ -87,8 +78,7 @@ class DesempenhoEscolarController extends CI_Controller
     }
 
     // Metodo para chamar a página para atualiar os dados do usuário
-    public function atualizar($id)
-    {
+    public function atualizar($id) {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -109,32 +99,25 @@ class DesempenhoEscolarController extends CI_Controller
 
         // Solução nada elegante, gambiarra nervosa
         $cont = 0;
-        foreach ($this->crud->select($parametros) as $dados)
-        {
-            if ($cont == 0)
-            {
+        foreach ($this->crud->select($parametros) as $dados) {
+            if ($cont == 0) {
                 $array_alunos .= '"' . $dados->id . ' - ' . $dados->aluno . '"';
                 $cont++;
-            }
-            else
-            {
+            } else {
                 $array_alunos .= ',"' . $dados->id . ' - ' . $dados->aluno . '"';
             }
         }
 
         $data["alunos"] = $array_alunos;
 
-        if ($this->session->userdata('nivel') > 1)
-        {
+        if ($this->session->userdata('nivel') > 1) {
             $parametros2 = array(
                 "select" => "d.id as id, d.idAluno, d.idUsuario, DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, a.aluno, d.desempenhoEscolar",
                 "table" => "desempenho as d",
                 "where" => array("d.idUsuario" => $this->session->userdata('id'), "d.id" => $id),
                 "join" => array("alunos as a" => "a.id = d.idAluno")
             );
-        }
-        else
-        {
+        } else {
             $parametros2 = array(
                 "select" => "d.id as id, d.idAluno, d.idUsuario, DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, a.aluno, d.desempenhoEscolar",
                 "table" => "desempenho as d",
@@ -150,17 +133,15 @@ class DesempenhoEscolarController extends CI_Controller
     }
 
     // Método que cadastra os dados do desempenho escolar 
-    public function cadastrarDesempenhoEscolar()
-    {
-        if (formata_data($_POST['dataInicio'], 1) > formata_data($_POST['dataFinal'], 1))
-        {
+    public function cadastrarDesempenhoEscolar() {
+        if (formata_data($_POST['dataInicio'], 1) > formata_data($_POST['dataFinal'], 1)) {
             echo '<div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> A data do início é menor que a data do final da avaliação.
                   </div>';
             exit;
         }
-        
+
         // ID do aluno
         $id = explode("-", $_POST["idAlunos"]);
 
@@ -173,8 +154,7 @@ class DesempenhoEscolarController extends CI_Controller
             "where" => array("status" => "1", "id" => $id[0])
         );
 
-        if ($this->crud->select($parametros))
-        {
+        if ($this->crud->select($parametros)) {
             $array = array(
                 "idAluno" => $id[0],
                 "idUsuario" => $this->session->userdata('id'),
@@ -183,8 +163,7 @@ class DesempenhoEscolarController extends CI_Controller
                 "desempenhoEscolar" => $_POST["desempenhoEscolar"]
             );
 
-            if ($this->crud->insert("desempenho", $array))
-            {
+            if ($this->crud->insert("desempenho", $array)) {
                 // Gerar Logs
                 $this->load->library('my_log');
                 $logs = new MY_Log();
@@ -197,9 +176,7 @@ class DesempenhoEscolarController extends CI_Controller
                       </div>';
                 echo '<script>$("#form").resetForm();</script>';
             }
-        }
-        else
-        {
+        } else {
             echo '<br><div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> Aluno não cadastrado ou com a data do período escolar findado.
@@ -208,17 +185,15 @@ class DesempenhoEscolarController extends CI_Controller
     }
 
     // Método para atualizar os dados do usuário
-    public function atualizarDesempenhoEscolar()
-    {
-        if (formata_data($_POST['dataInicio'], 1) > formata_data($_POST['dataFinal'], 1))
-        {
+    public function atualizarDesempenhoEscolar() {
+        if (formata_data($_POST['dataInicio'], 1) > formata_data($_POST['dataFinal'], 1)) {
             echo '<div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> A data do início é menor que a data do final da avaliação.
                   </div>';
             exit;
         }
-        
+
         $id = explode("-", $_POST["idAlunos"]);
 
         $this->load->model("crud");
@@ -229,8 +204,7 @@ class DesempenhoEscolarController extends CI_Controller
             "where" => array("status" => "1", "id" => $id[0])
         );
 
-        if ($this->crud->select($parametros))
-        {
+        if ($this->crud->select($parametros)) {
             $array = array(
                 "id" => $_POST['id'],
                 "idAluno" => $id[0],
@@ -240,8 +214,7 @@ class DesempenhoEscolarController extends CI_Controller
                 "desempenhoEscolar" => $_POST["desempenhoEscolar"]
             );
 
-            if ($this->crud->update("desempenho", "id", $array))
-            {
+            if ($this->crud->update("desempenho", "id", $array)) {
                 // Gerar Logs
                 $this->load->library('my_log');
                 $logs = new MY_Log();
@@ -253,9 +226,7 @@ class DesempenhoEscolarController extends CI_Controller
                       <strong>Sucesso!</strong> Dados do Desempenho Escolar atualizados.
                       </div>';
             }
-        }
-        else
-        {
+        } else {
             echo '<br><div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> Desempenho não atualizado ou com a data do período escolar findado.
@@ -264,8 +235,7 @@ class DesempenhoEscolarController extends CI_Controller
     }
 
     // Método que invoca a página para listar o usuario
-    public function Gerenciar()
-    {
+    public function Gerenciar() {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -275,8 +245,7 @@ class DesempenhoEscolarController extends CI_Controller
         $data['pagina'] = 'desempenhoEscolarGerenciar';
 
         // Redireciona URL para a busca
-        if ($_POST["busca"])
-        {
+        if ($_POST["busca"]) {
             redirect('desempenho-escolar/gerenciar/' . strtolower(url_title(convert_accented_characters($_POST["busca"]))), 'refresh');
         }
 
@@ -285,29 +254,22 @@ class DesempenhoEscolarController extends CI_Controller
         $this->load->library('pagination');
 
         // Dados para a busca
-        if ($this->uri->segment(3) == "null")
-        {
+        if ($this->uri->segment(3) == "null") {
             $dadosBusca = null;
-        }
-        else
-        {
+        } else {
             $dadosBusca = str_replace("-", " ", $this->uri->segment(3));
         }
 
         // Quantidade de registro a serem mostrados por páginma
         $qtd = 10;
 
-        if ($this->uri->segment(4) == "")
-        {
+        if ($this->uri->segment(4) == "") {
             $inicio = 0;
-        }
-        else
-        {
+        } else {
             $inicio = $this->uri->segment(4);
         }
 
-        if ($this->session->userdata('nivel') > 1)
-        {
+        if ($this->session->userdata('nivel') > 1) {
             $parametros = array(
                 "select" => "d.id as id, d.idAluno, d.idUsuario, DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, a.aluno, u.nome as usuario",
                 "table" => "desempenho as d",
@@ -316,9 +278,7 @@ class DesempenhoEscolarController extends CI_Controller
                 "like" => array("aluno" => $dadosBusca),
                 "join" => array("usuarios as u" => "u.id = d.idUsuario", "alunos as a" => "a.id = d.idAluno")
             );
-        }
-        else
-        {
+        } else {
             $parametros = array(
                 "select" => "d.id as id, d.idAluno, d.idUsuario, DATE_FORMAT(d.dataInicio,'%d/%m/%Y') as dataInicio, DATE_FORMAT(d.dataFinal,'%d/%m/%Y') as dataFinal, a.aluno, u.nome as usuario",
                 "table" => "desempenho as d",
@@ -364,8 +324,7 @@ class DesempenhoEscolarController extends CI_Controller
      * Método para excluir os dados do alunos
      * @access Administrador
      */
-    public function excluir($id)
-    {
+    public function excluir($id) {
         /**
          * Bibliotecas e ajudantes carregados
          * @filesource application/model/crud.php
@@ -375,8 +334,7 @@ class DesempenhoEscolarController extends CI_Controller
         /**
          * Somente administradores podem excluir os dados dos alunos
          */
-        if (!$this->session->userdata('nivel') == 1)
-        {
+        if (!$this->session->userdata('nivel') == 1) {
             exit;
         }
 
@@ -385,23 +343,20 @@ class DesempenhoEscolarController extends CI_Controller
          */
         $retorno = $this->crud->delete("desempenho", "id", array("id" => $id));
 
-        if ($retorno == true)
-        {
-        // Gerar Logs
-        $this->load->library('my_log');
-        $logs = new MY_Log();
-        $logs->setLogPath(APPPATH . "logs/" . $this->session->userdata('nome') . "/");
-        $logs->write_log('info', "O usuario deletou os dados do desempenho escolar com ID: " . $id);
-        
-        $mensagem = array(
+        if ($retorno == true) {
+            // Gerar Logs
+            $this->load->library('my_log');
+            $logs = new MY_Log();
+            $logs->setLogPath(APPPATH . "logs/" . $this->session->userdata('nome') . "/");
+            $logs->write_log('info', "O usuario deletou os dados do desempenho escolar com ID: " . $id);
+
+            $mensagem = array(
                 'mensagem' => '<br><div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert">&times;</button>
                            <strong>Sucesso!</strong> Desempenho Escolar excluido com sucesso.
                            </div>'
             );
-        }
-        else
-        {
+        } else {
             $mensagem = array(
                 'mensagem' => '<br><div class="alert alert-error">
                                <button type="button" class="close" data-dismiss="alert">&times;</button>
