@@ -382,7 +382,8 @@ class AlunosController extends CI_Controller {
             "responsavel" => $_POST['responsavel'],
             "contatoResponsavel" => $_POST['contatoResponsavel'],
             "dataMatricula" => formata_data($_POST['dataMatricula'], 1),
-            "dataTerminoEstudos" => formata_data($_POST['dataTerminoEstudos'], 1)
+            "dataTerminoEstudos" => formata_data($_POST['dataTerminoEstudos'], 1),
+            "foto" => $imagem['file_name']
         );
 
         /**
