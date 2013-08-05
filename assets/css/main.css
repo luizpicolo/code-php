@@ -2,3 +2,13 @@
     width: 500px;
     margin: 10px auto 30px;
 }
+
+.ocorrencia-fechada {
+    color: #2ace5b;
+    font-size: 2em;
+}
+
+.ocorrencia-aberta {
+    color: #da4f49;
+    font-size: 2em;
+}
