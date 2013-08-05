@@ -19,11 +19,9 @@ class OcorrenciasController extends CI_Controller {
 
     // Aqui é feito a reescrita da classe construtora e a verificação
     // da autenticidade do usuário
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        if (!$this->session->userdata('logado'))
-        {
+        if (!$this->session->userdata('logado')) {
             redirect('', 'refresh');
         }
     }
@@ -31,13 +29,11 @@ class OcorrenciasController extends CI_Controller {
     /**
      * Método chamado após o Construtor
      */
-    public function index()
-    {
+    public function index() {
         $this->load->view('principal');
     }
 
-    public function Cadastrar()
-    {
+    public function Cadastrar() {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -57,15 +53,11 @@ class OcorrenciasController extends CI_Controller {
 
         // Solução nada elegante, gambiarra nervosa
         $cont = 0;
-        foreach ($this->crud->select($parametros) as $dados)
-        {
-            if ($cont == 0)
-            {
+        foreach ($this->crud->select($parametros) as $dados) {
+            if ($cont == 0) {
                 $array_alunos .= '"' . $dados->id . ' - ' . $dados->aluno . '"';
                 $cont++;
-            }
-            else
-            {
+            } else {
                 $array_alunos .= ',"' . $dados->id . ' - ' . $dados->aluno . '"';
             }
         }
@@ -75,8 +67,7 @@ class OcorrenciasController extends CI_Controller {
         $this->load->view('principal', $data);
     }
 
-    public function atualizar($id)
-    {
+    public function atualizar($id) {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -96,32 +87,25 @@ class OcorrenciasController extends CI_Controller {
 
         // Solução nada elegante, gambiarra nervosa
         $cont = 0;
-        foreach ($this->crud->select($parametros) as $dados)
-        {
-            if ($cont == 0)
-            {
+        foreach ($this->crud->select($parametros) as $dados) {
+            if ($cont == 0) {
                 $array_alunos .= '"' . $dados->id . ' - ' . $dados->aluno . '"';
                 $cont++;
-            }
-            else
-            {
+            } else {
                 $array_alunos .= ',"' . $dados->id . ' - ' . $dados->aluno . '"';
             }
         }
 
         $data["alunos"] = $array_alunos;
 
-        if ($this->session->userdata('nivel') > 1)
-        {
+        if ($this->session->userdata('nivel') > 1) {
             $parametros2 = array(
                 "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia,  DATE_FORMAT(o.dataSolucao,'%d/%m/%Y') as dataSolucao, a.aluno, o.ocorrencia, o.solucao",
                 "table" => "ocorrencias as o",
                 "where" => array("o.idUsuario" => $this->session->userdata('id'), "o.id" => $id),
                 "join" => array("alunos as a" => "a.id = o.idAluno")
             );
-        }
-        else
-        {
+        } else {
             $parametros2 = array(
                 "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia,  DATE_FORMAT(o.dataSolucao,'%d/%m/%Y') as dataSolucao, a.aluno, o.ocorrencia, o.solucao",
                 "table" => "ocorrencias as o",
@@ -135,17 +119,17 @@ class OcorrenciasController extends CI_Controller {
         $this->load->view('principal', $data);
     }
 
-    public function cadastrarOcorrencia()
-    {
-        if (formata_data($_POST['dataOcorrencia'], 1) > formata_data($_POST['dataSolucao'], 1))
-        {
-            echo '<div class="alert alert-error">
+    public function cadastrarOcorrencia() {
+        if ($_POST['dataSolucao']) {
+            if (formata_data($_POST['dataOcorrencia'], 1) > formata_data($_POST['dataSolucao'], 1)) {
+                echo '<div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> A data da ocorrência é menor que a data da solução.
                   </div>';
-            exit;
+                exit;
+            }
         }
-        
+
         $id = explode("-", $_POST["idAlunos"]);
 
         $this->load->model("crud");
@@ -156,8 +140,7 @@ class OcorrenciasController extends CI_Controller {
             "where" => array("status" => "1", "id" => $id[0])
         );
 
-        if ($this->crud->select($parametros))
-        {
+        if ($this->crud->select($parametros)) {
             $array = array(
                 "idAluno" => $id[0],
                 "idUsuario" => $this->session->userdata('id'),
@@ -167,8 +150,7 @@ class OcorrenciasController extends CI_Controller {
                 "solucao" => $_POST["solucao"]
             );
 
-            if ($this->crud->insert("ocorrencias", $array))
-            {
+            if ($this->crud->insert("ocorrencias", $array)) {
                 // Gerar Logs
                 $this->load->library('my_log');
                 $logs = new MY_Log();
@@ -181,9 +163,7 @@ class OcorrenciasController extends CI_Controller {
                       </div>';
                 echo '<script>$("#form").resetForm();</script>';
             }
-        }
-        else
-        {
+        } else {
             echo '<br><div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> Aluno não cadastrado ou com a data do período escolar findado.
@@ -191,17 +171,17 @@ class OcorrenciasController extends CI_Controller {
         }
     }
 
-    public function atualizarOcorrencia()
-    {
-        if (formata_data($_POST['dataOcorrencia'], 1) > formata_data($_POST['dataSolucao'], 1))
-        {
-            echo '<div class="alert alert-error">
+    public function atualizarOcorrencia() {
+        if ($_POST['dataSolucao']) {
+            if (formata_data($_POST['dataOcorrencia'], 1) > formata_data($_POST['dataSolucao'], 1)) {
+                echo '<div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> A data da ocorrência é menor que a data da solução.
                   </div>';
-            exit;
+                exit;
+            }
         }
-        
+
         $id = explode("-", $_POST["idAlunos"]);
 
         $this->load->model("crud");
@@ -212,8 +192,7 @@ class OcorrenciasController extends CI_Controller {
             "where" => array("status" => "1", "id" => $id[0])
         );
 
-        if ($this->crud->select($parametros))
-        {
+        if ($this->crud->select($parametros)) {
             $array = array(
                 "id" => $_POST['id'],
                 "idAluno" => $id[0],
@@ -224,8 +203,7 @@ class OcorrenciasController extends CI_Controller {
                 "solucao" => $_POST["solucao"]
             );
 
-            if ($this->crud->update("ocorrencias", "id", $array))
-            {
+            if ($this->crud->update("ocorrencias", "id", $array)) {
 
                 // Gerar Logs
                 $this->load->library('my_log');
@@ -238,9 +216,7 @@ class OcorrenciasController extends CI_Controller {
                       <strong>Sucesso!</strong> Dados da ocorrência atualizados.
                       </div>';
             }
-        }
-        else
-        {
+        } else {
             echo '<br><div class="alert alert-error">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Erro!</strong> Aluno não cadastrado ou com a data do período escolar findado.
@@ -248,8 +224,7 @@ class OcorrenciasController extends CI_Controller {
         }
     }
 
-    public function Gerenciar()
-    {
+    public function Gerenciar() {
         // Gerar Logs
         $this->load->library('my_log');
         $logs = new MY_Log();
@@ -259,60 +234,48 @@ class OcorrenciasController extends CI_Controller {
         $data['pagina'] = 'ocorrenciasGerenciar';
 
         // Redireciona URL para a busca
-        if ($_POST["busca"])
-        {
+        if ($_POST["busca"]) {
             redirect('ocorrencias/gerenciar/' . strtolower(url_title(convert_accented_characters($_POST["busca"]))), 'refresh');
         }
-
 
         // Paginacao
         $this->load->model("crud");
         $this->load->library('pagination');
 
         // Dados para a busca
-        if ($this->uri->segment(3) == "null")
-        {
+        if ($this->uri->segment(3) == "null") {
             $dadosBusca = null;
-        }
-        else
-        {
+        } else {
             $dadosBusca = str_replace("-", " ", $this->uri->segment(3));
         }
 
         // Quantidade de registro a serem mostrados por páginma
         $qtd = 20;
 
-        if ($this->uri->segment(4) == "")
-        {
+        if ($this->uri->segment(4) == "") {
             $inicio = 0;
-        }
-        else
-        {
+        } else {
             $inicio = $this->uri->segment(4);
         }
 
-        if ($this->session->userdata('nivel') > 1)
-        {
-            $parametros = array (
-                "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, a.aluno, u.nome as usuario",
+        if ($this->session->userdata('nivel') > 1) {
+            $parametros = array(
+                "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, DATE_FORMAT(o.dataSolucao,'%d/%m/%Y') as dataSolucao, a.aluno, u.nome as usuario",
                 "table" => "ocorrencias as o",
                 "where" => array("o.idUsuario" => $this->session->userdata('id')),
                 "limit" => "$qtd, $inicio",
                 "like" => array("aluno" => $dadosBusca),
                 "join" => array("usuarios as u" => "u.id = o.idUsuario", "alunos as a" => "a.id = o.idAluno")
             );
-        }
-        else
-        {
-            $parametros = array (
-                "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, a.aluno, u.nome as usuario",
+        } else {
+            $parametros = array(
+                "select" => "o.id as id, o.idAluno, o.idUsuario, DATE_FORMAT(o.dataOcorrencia,'%d/%m/%Y') as dataOcorrencia, DATE_FORMAT(o.dataSolucao,'%d/%m/%Y') as dataSolucao, a.aluno, u.nome as usuario",
                 "table" => "ocorrencias as o",
                 //"where" => array("o.idUsuario" => $this->session->userdata('id')),
                 "limit" => "$qtd, $inicio",
                 "like" => array("aluno" => $dadosBusca),
                 "join" => array("usuarios as u" => "u.id = o.idUsuario", "alunos as a" => "a.id = o.idAluno")
             );
-
         }
 
         $dados = $this->crud->select($parametros, false);
@@ -350,8 +313,7 @@ class OcorrenciasController extends CI_Controller {
      * Método para excluir os dados do alunos
      * @access Administrador
      */
-    public function excluir($id)
-    {
+    public function excluir($id) {
         /**
          * Bibliotecas e ajudantes carregados
          * @filesource application/model/crud.php
@@ -361,8 +323,7 @@ class OcorrenciasController extends CI_Controller {
         /**
          * Somente administradores podem excluir os dados dos alunos
          */
-        if (!$this->session->userdata('nivel') == 1)
-        {
+        if (!$this->session->userdata('nivel') == 1) {
             exit;
         }
 
@@ -371,8 +332,7 @@ class OcorrenciasController extends CI_Controller {
          */
         $retorno = $this->crud->delete("ocorrencias", "id", array("id" => $id));
 
-        if ($retorno == true)
-        {
+        if ($retorno == true) {
             // Gerar Logs
             $this->load->library('my_log');
             $logs = new MY_Log();
@@ -385,9 +345,7 @@ class OcorrenciasController extends CI_Controller {
                            <strong>Sucesso!</strong> Ocorrência excluida com sucesso.
                            </div>'
             );
-        }
-        else
-        {
+        } else {
             $mensagem = array(
                 'mensagem' => '<br><div class="alert alert-error">
                                <button type="button" class="close" data-dismiss="alert">&times;</button>
