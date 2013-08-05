@@ -15,7 +15,7 @@
                     </div>
                     <div class="span5">
                         <label>Data Solução</label>
-                        <input type="text" class="datepicker span10 maskDate" value="<?php echo $dados[0]->dataSolucao; ?>" name="dataSolucao" required>
+                        <input type="text" class="datepicker span10 maskDate" value="<?php if ($dados[0]->dataSolucao != "00/00/0000") { echo $dados[0]->dataSolucao; }; ?>" name="dataSolucao">
                     </div>
                 </div>
             </div>

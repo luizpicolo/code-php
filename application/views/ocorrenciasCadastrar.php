@@ -15,7 +15,7 @@
                     </div>
                     <div class="span5">
                         <label>Data Solução</label> 
-                        <input type="text" class="datepicker span10 maskDate" name="dataSolucao" required>
+                        <input type="text" class="datepicker span10 maskDate" name="dataSolucao">
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <label>Ocorrência</label>
                 <textarea class="wysihtml5 span15" name="ocorrencia" rows="7" required></textarea>    
                 <label>Solucões adotas para o problema</label>
-                <textarea class="wysihtml5 span15" name="solucao" rows="7" required></textarea>  
+                <textarea class="wysihtml5 span15" name="solucao" rows="7"></textarea>  
                 <span class="help-block"></span>
                 <input type="submit" class="btn" value="Cadastrar">
                 <span class="help-block"></span>

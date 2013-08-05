@@ -16,7 +16,7 @@
                     </div>
                     <div class="span5">
                         <label>Final</label>
-                        <input type="text" class="datepicker span10 maskDate" name="dataFinal" required>
+                        <input type="text" class="datepicker span10 maskDate" name="dataFinal">
                     </div>
                 </div>
             </div>

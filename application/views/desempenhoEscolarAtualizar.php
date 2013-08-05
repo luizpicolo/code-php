@@ -16,7 +16,7 @@
                     </div>
                     <div class="span5">
                         <label>Final</label>
-                        <input type="text" class="datepicker span10 maskDate" name="dataFinal" value="<?php echo $dados[0]->dataFinal; ?>" required>
+                        <input type="text" class="datepicker span10 maskDate" name="dataFinal" value="<?php echo $dados[0]->dataFinal; ?>">
                     </div>
                 </div>
             </div>

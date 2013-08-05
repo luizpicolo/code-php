@@ -25,20 +25,26 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>ID</th>
+            <th class="text-center">ID</th>
             <th>Alunos</th>
             <th>Data Ocorrência</th>
             <th>Ocorrência registrada por:</th>
-            <th>Ação</th>
+            <th>Situação:</th>
+            <th>Açôes</th>
         </tr>
     </thead>
     <?php foreach ($dadosbusca as $dados): ?>
         <tr>
-            <th><?php echo $dados->id; ?></th>
+            <th class="text-center"><?php echo $dados->id; ?></th>
             <td><?php echo $dados->aluno; ?></td>
             <td><?php echo $dados->dataOcorrencia; ?></td>
             <td><?php echo $dados->usuario; ?></td>
-            <td>
+            <?php if ($dados->dataSolucao != '00/00/0000'):?>
+            <td class="text-center ocorrencia-fechada" title="Ocorrëncia Fechada">&#10004</td>
+            <?php else : ?>
+            <td class="text-center ocorrencia-aberta" title="Ocorrência em Aberto">&#10006</td>
+            <?php endif; ?>
+            <td class="text-center">
                 <a class="btn btn-mini" href="index.php/ocorrencias/atualizar/<?php echo $dados->id; ?>"><i class="icon-pencil"></i> Editar</a>
                 <a class="btn btn-mini btn-danger" href="index.php/ocorrencias/excluir/<?php echo $dados->id; ?>" onclick="javascript:if(!confirm('Deseja realmente excluir os dados desta ocorrência?')){return false;}"><i class="icon-remove-sign"></i> Excluir</a>
             </td>

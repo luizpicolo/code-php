@@ -16,13 +16,20 @@
                 <div class="row-fluid">
                     <div class="span5">
                         <label>Data Início</label>
-                        <input type="text" class="datepicker span10 maskDate" name="dataInicio" required>
+                        <input type="text" class="datepicker span10 maskDate" name="dataInicio">
                     </div>
                     <div class="span5">
                         <label>Data Final</label>
-                        <input type="text" class="datepicker span10 maskDate" name="dataFinal" required>
+                        <input type="text" class="datepicker span10 maskDate" name="dataFinal">
                     </div>
                 </div>
+                <label>Busca por Ano</label>
+                <select name="ano">
+                    <option></option>
+                    <?php for ($i = date("Y"); $i > 2000; $i--): ?>
+                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                    <?php endfor; ?>
+                </select>
                 <span class="help-block"></span>
                 <input type="submit" class="btn" value="Buscar">
                 <span class="help-block"></span>
