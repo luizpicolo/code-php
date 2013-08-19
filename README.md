@@ -53,4 +53,5 @@ Se for servidor Linux, mude as permissões dos diretório:<br>
 <b>assets/fotosAlunos/ = 0777<br></b>
 <b>application/logs/ = 0777<br></b>
        
-
+<h2>Licença de Uso</h2>
+Este software esta licenciado sobre a MIT License - http://choosealicense.com/licenses/mit/.
