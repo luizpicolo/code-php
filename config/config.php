@@ -8,4 +8,4 @@
     define('USERNAME', '');
     define('PASSWORD', '');
     define('DATABASE', '');
-    define('PORTA', '3306');
+    define('DOOR', '3306');
