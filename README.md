@@ -1,4 +1,3 @@
-![Alt text](http://i.imgur.com/CSTSOdZ.png "CODE" )
 # C.O.D.E - Controle de Ocorrências e Desempenho Escolar
 
 ## Sobre o Sistema:
