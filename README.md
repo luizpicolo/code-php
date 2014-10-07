@@ -28,9 +28,9 @@ Reporte erros: [https://github.com/luizpicolo/code/issues](https://github.com/lu
 
 ## Cooperadores:
 
-Michele Fernanda Picolo - [http://www.facebook.com/michele.picolo.7?fref=ts](http://www.facebook.com/michele.picolo.7?fref=ts)
-Raquel Campos Klein - [http://www.facebook.com/queldevelopj?fref=ts](http://www.facebook.com/queldevelopj?fref=ts)
-Wilma Costa - [http://www.facebook.com/profile.php?id=100002254005555](http://www.facebook.com/profile.php?id=100002254005555)
+Michele Fernanda Picolo - [http://www.facebook.com/michele.picolo.7?fref=ts](http://www.facebook.com/michele.picolo.7?fref=ts)    
+Raquel Campos Klein - [http://www.facebook.com/queldevelopj?fref=ts](http://www.facebook.com/queldevelopj?fref=ts)    
+Wilma Costa - [http://www.facebook.com/profile.php?id=100002254005555](http://www.facebook.com/profile.php?id=100002254005555)    
 Vinícios Carvalho - [http://www.facebook.com/vinicioskf?ref=ts&fref=ts](http://www.facebook.com/vinicioskf?ref=ts&fref=ts)    
 
 ## Instalação:
@@ -38,11 +38,9 @@ Vinícios Carvalho - [http://www.facebook.com/vinicioskf?ref=ts&fref=ts](http://
 A instalação do C.O.D.E é extremamente simples.    
 Após o downloads do sistema, faça o upload no local desejado.    
 Crie seu banco e importe o arquivo sql que está no diretório
-sql/sql.sql
-Logo após acesse o arquivo 
-    config/config.php 
-e mude as configurações do banco
-com os dados do banco criado.    
+**sql/sql.sql**.    
+Logo após renomeia o arquivo **config/config.exameplo.php** para
+config/config.php e mude as configuraçòes
 
     define('HOSTNAME', 'URL');
     define('USERNAME', 'USUÁRIO');
